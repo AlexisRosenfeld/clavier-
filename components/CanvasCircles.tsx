@@ -6,9 +6,13 @@ import Svg, { Circle } from "react-native-svg";
 export default function CanvasCircles({ circles, setCircles }) {
   const containerRef = useRef(null);
   const [layout, setLayout] = useState({ width: 0, height: 0 });
+  // Si pas de props, fallback à un state local
+  const [localCircles, localSetCircles] = useState([]);
+  const circlesSafe = circles ?? localCircles;
+  const setCirclesSafe = setCircles ?? localSetCircles;
 
   const addCircleAt = (x, y) => {
-    setCircles((prev) => [...prev, { x, y, r: 30 }]);
+    setCirclesSafe((prev) => [...prev, { x, y, r: 30 }]);
   };
 
   return (
@@ -34,7 +38,7 @@ export default function CanvasCircles({ circles, setCircles }) {
           height={layout.height}
           style={{ position: "absolute", left: 0, top: 0 }}
         >
-          {circles.map((c, i) => (
+          {Array.isArray(circlesSafe) && circlesSafe.map((c, i) => (
             <Circle
               key={i}
               cx={c.x}

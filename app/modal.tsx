@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import CanvasCircles from '../components/CanvasCircles';
 
 export default function ModalScreen() {
   return (
@@ -12,7 +11,7 @@ export default function ModalScreen() {
       <Link href="/" dismissTo style={styles.link}>
         <ThemedText type="link">Go to home screen</ThemedText>
       </Link>
-      <CanvasCircles />
+
     </ThemedView>
   );
 }
