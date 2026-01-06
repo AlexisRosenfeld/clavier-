@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Pressable, View } from "react-native";
-import Svg, { Circle } from "react-native-svg";
+import { Pressable, StyleSheet, View } from "react-native";
 
 // On reçoit maintenant circles et setCircles en props
 export default function CanvasCircles({ circles, setCircles }) {
@@ -28,25 +27,47 @@ export default function CanvasCircles({ circles, setCircles }) {
           addCircleAt(locationX, locationY);
         }}
       >
-        {/* Calque de dessin */}
-        <Svg
-          width={layout.width}
-          height={layout.height}
-          style={{ position: "absolute", left: 0, top: 0 }}
-        >
-                {Array.isArray(circles) && circles.map((c, i) => (
-                  <Circle
-                    key={i}
-                    cx={c.x}
-                    cy={c.y}
-                    r={35} // pour matcher minWidth/minHeight 70
-                    stroke="#191717ff"
-                    strokeWidth={2}
-                    fill="#f8fdffff"
-                  />
-                ))}
-        </Svg>
+                {/* Calque de dessin avec Pressable circulaires */}
+                <View style={{ position: "absolute", left: 0, top: 0, width: layout.width, height: layout.height ,backgroundColor: 'black' }} pointerEvents="box-none">
+                  {Array.isArray(circles) && circles.map((c, i) => (
+                    <Pressable
+                      key={i}
+                      style={[
+                        styles.circle,
+                        {
+                          position: 'absolute',
+                          left: c.x - 35,
+                          top: c.y - 35,
+                          width: 70,
+                          height: 70,
+                        }
+                      ]}
+                      // Ajoute ici une interaction si besoin
+                    />
+                  ))}
+                </View>
       </Pressable>
-    </View>
+    </View> 
   );
 }
+
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+     circle: {
+       backgroundColor: '#f8fdffff',
+       borderRadius: 30,
+       borderColor: '#191717ff',
+       // width, height, borderRadius sont ajoutés dynamiquement
+     },
+   button: {
+    backgroundColor: '#f8fdffff',
+    paddingVertical: 10,
+    paddingHorizontal: 18,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 70,
+    minHeight: 70,
+  },
+});

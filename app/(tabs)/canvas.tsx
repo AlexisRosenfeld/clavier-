@@ -11,16 +11,16 @@ export default function CanvasScreen() {
       {/* Bouton superposé */}
       <View style={styles.overlay} pointerEvents="box-none">
         <View style={{ flexDirection: 'row', gap: 12 }}>
-          <Pressable style={styles.button} onPress={() => setCircles([])}>
-            <Text style={styles.buttonText}>Vider</Text>
-          </Pressable>
-          <Pressable
-            style={[styles.button, { backgroundColor: '#e67e22' }]}
-            onPress={() => setCircles(prev => prev.slice(0, -1))}
-            disabled={circles.length === 0}
-          >
-            <Text style={styles.buttonText}>Annuler</Text>
-          </Pressable>
+              <Pressable
+                style={[styles.button, { backgroundColor: '#e67e22' }]}
+                onPress={() => setCircles(prev => prev.slice(0, -1))}
+                disabled={circles.length === 0}
+              >
+                <Text style={styles.buttonText}>Annuler</Text>
+              </Pressable>
+              <Pressable style={styles.button} onPress={() => setCircles([])}>
+                <Text style={styles.buttonText}>Vider</Text>
+              </Pressable>
         </View>
       </View>
     </View>

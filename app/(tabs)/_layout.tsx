@@ -38,14 +38,14 @@ export default function TabLayout() {
         <Tabs.Screen
           name="canvas"
           options={{
-            title: 'Canvas',
+            title: 'Modification',
             tabBarIcon: ({ color }) => <IconSymbol size={28} name="circle" color={color} />, // Choix d'une icône simple
           }}
         />
         <Tabs.Screen
           name="les_bouttons"
           options={{
-            title: 'Boutons',
+            title: 'Utilisation',
             tabBarIcon: ({ color }) => <IconSymbol size={28} name="chevron.right" color={color} />, 
           }}
         />
