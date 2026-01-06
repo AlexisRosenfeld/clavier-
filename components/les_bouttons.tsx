@@ -25,22 +25,72 @@ export default function LesBouttons({ circles, text, setText }) {
           <Text style={styles.resetButtonText}>Reset texte</Text>
         </Pressable>
       </View>
-      {circles.map((c, i) => (
-        <Pressable
-          key={i}
-          style={({ pressed }) => [
-            styles.button,
-            { position: 'absolute', left: c.x - 30, top: c.y - 30 },
-            pressed && { backgroundColor: 'black' }
-          ]}
-          onPress={() => {
-            const letter = qwertz[i % qwertz.length];
-            setText((prev) => prev + letter);
-          }}
-        >
-          <Text style={styles.buttonText}>{qwertz[i % qwertz.length]}</Text>
-        </Pressable>
-      ))}
+      {circles.map((c, i) => {
+        if (c.type === "normal" || !c.type) {
+          return (
+            <Pressable
+              key={i}
+              style={({ pressed }) => [
+                styles.button,
+                { position: 'absolute', left: c.x - 30, top: c.y - 30 },
+                pressed && { backgroundColor: 'black' }
+              ]}
+              onPress={() => {
+                const letter = qwertz[i % qwertz.length];
+                setText((prev) => prev + letter);
+              }}
+            >
+              <Text style={styles.buttonText}>{qwertz[i % qwertz.length]}</Text>
+            </Pressable>
+          );
+        } else if (c.type === "space") {
+          return (
+            <Pressable
+              key={i}
+              style={({ pressed }) => [
+                styles.button,
+                styles.spaceButton,
+                { position: 'absolute', left: c.x - 75, top: c.y - 30, backgroundColor: '#eee' },
+                pressed && { backgroundColor: 'black' }
+              ]}
+              onPress={() => setText((prev) => prev + ' ')}
+            >
+              <Text style={styles.buttonText}>␣</Text>
+            </Pressable>
+          );
+        } else if (c.type === "backspace") {
+          return (
+            <Pressable
+              key={i}
+              style={({ pressed }) => [
+                styles.button,
+                styles.backspaceButton,
+                { position: 'absolute', left: c.x - 60, top: c.y - 30, backgroundColor: '#eee' },
+                pressed && { backgroundColor: 'black' }
+              ]}
+              onPress={() => setText((prev) => prev.slice(0, -1))}
+            >
+              <Text style={styles.buttonText}>⌫</Text>
+            </Pressable>
+          );
+        } else if (c.type === "shift") {
+          return (
+            <Pressable
+              key={i}
+              style={({ pressed }) => [
+                styles.button,
+                styles.shiftButton,
+                { position: 'absolute', left: c.x - 30, top: c.y - 50, backgroundColor: '#eee' },
+                pressed && { backgroundColor: 'black' }
+              ]}
+              // Ajoutez ici la logique shift si besoin
+            >
+              <Text style={styles.buttonText}>⇧</Text>
+            </Pressable>
+          );
+        }
+        return null;
+      })}
     </View>
   );
 }
@@ -92,6 +142,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     minWidth: 70,
     minHeight: 70,
+  },
+  spaceButton: {
+    minWidth: 150,
+    width: 150,
+    maxWidth: 200,
+  },
+  backspaceButton: {
+    minWidth: 120,
+    width: 120,
+    maxWidth: 150,
+  },
+  shiftButton: {
+    minHeight: 100,
+    height: 100,
+    maxHeight: 120,
   },
   buttonText: {
     color: '#191717ff',

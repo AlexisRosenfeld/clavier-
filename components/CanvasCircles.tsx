@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 
+
 // On reçoit maintenant circles et setCircles en props
 export default function CanvasCircles({ circles, setCircles }) {
   const containerRef = useRef(null);
@@ -24,33 +25,32 @@ export default function CanvasCircles({ circles, setCircles }) {
         style={{ flex: 1 }}
         onPressIn={(e) => {
           const { locationX, locationY } = e.nativeEvent;
-          addCircleAt(locationX, locationY);
+          addCircleAt(locationX, locationY, "normal");
         }}
       >
-                {/* Calque de dessin avec Pressable circulaires */}
-                <View style={{ position: "absolute", left: 0, top: 0, width: layout.width, height: layout.height ,backgroundColor: 'black' }} pointerEvents="box-none">
-                  {Array.isArray(circles) && circles.map((c, i) => (
-                    <Pressable
-                      key={i}
-                      style={[
-                        styles.circle,
-                        {
-                          position: 'absolute',
-                          left: c.x - 35,
-                          top: c.y - 35,
-                          width: 70,
-                          height: 70,
-                        }
-                      ]}
-                      // Ajoute ici une interaction si besoin
-                    />
-                  ))}
-                </View>
+        {/* Calque de dessin avec Pressable circulaires */}
+        <View style={{ position: "absolute", left: 0, top: 0, width: layout.width, height: layout.height ,backgroundColor: 'black' }} pointerEvents="box-none">
+          {Array.isArray(circles) && circles.map((c, i) => (
+            <Pressable
+              key={i}
+              style={[
+                styles.circle,
+                {
+                  position: 'absolute',
+                  left: c.x - 35,
+                  top: c.y - 35,
+                  width: 70,
+                  height: 70,
+                }
+              ]}
+              // Ajoute ici une interaction si besoin
+            />
+          ))}
+        </View>
       </Pressable>
-    </View> 
+    </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
