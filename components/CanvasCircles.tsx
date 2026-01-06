@@ -6,13 +6,9 @@ import Svg, { Circle } from "react-native-svg";
 export default function CanvasCircles({ circles, setCircles }) {
   const containerRef = useRef(null);
   const [layout, setLayout] = useState({ width: 0, height: 0 });
-  // Si pas de props, fallback à un state local
-  const [localCircles, localSetCircles] = useState([]);
-  const circlesSafe = circles ?? localCircles;
-  const setCirclesSafe = setCircles ?? localSetCircles;
 
   const addCircleAt = (x, y) => {
-    setCirclesSafe((prev) => [...prev, { x, y, r: 30 }]);
+    setCircles((prev) => [...prev, { x, y, r: 30 }]);
   };
 
   return (
@@ -38,17 +34,17 @@ export default function CanvasCircles({ circles, setCircles }) {
           height={layout.height}
           style={{ position: "absolute", left: 0, top: 0 }}
         >
-          {Array.isArray(circlesSafe) && circlesSafe.map((c, i) => (
-            <Circle
-              key={i}
-              cx={c.x}
-              cy={c.y}
-              r={c.r}
-              stroke="black"
-              strokeWidth={2}
-              fill="transparent"
-            />
-          ))}
+                {Array.isArray(circles) && circles.map((c, i) => (
+                  <Circle
+                    key={i}
+                    cx={c.x}
+                    cy={c.y}
+                    r={35} // pour matcher minWidth/minHeight 70
+                    stroke="#191717ff"
+                    strokeWidth={2}
+                    fill="#f8fdffff"
+                  />
+                ))}
         </Svg>
       </Pressable>
     </View>
