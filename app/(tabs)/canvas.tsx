@@ -30,7 +30,7 @@ export default function CanvasScreen() {
       <CanvasCircles circles={circles} setCircles={handleSetCircles} />
       {/* Bouton superposé */}
       <View style={styles.overlay} pointerEvents="box-none">
-        <View style={{ flexDirection: 'row', gap: 12, marginBottom: 8 }}>
+        <View style={{ flexDirection: 'row', gap: 12 }}>
           <Pressable
             style={[styles.button, { backgroundColor: '#e67e22' }]}
             onPress={() => setCircles(prev => prev.slice(0, -1))}
@@ -42,11 +42,12 @@ export default function CanvasScreen() {
             <Text style={styles.buttonText}>Vider</Text>
           </Pressable>
         </View>
+        {/* Légende et boutons Touches particulières */}
         <View style={{ marginTop: 16, width: '100%', alignItems: 'flex-end' }}>
           <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 22, marginBottom: 10, marginRight: 4, textShadowColor: '#000', textShadowOffset: {width: 1, height: 1}, textShadowRadius: 4 }}>
             Touches particulières
           </Text>
-          <View style={{ flexDirection: 'row', gap: 12 }}>
+          <View style={{ flexDirection: 'row', gap: 12, marginBottom: 8 }}>
             <Pressable
               style={[styles.button, nextType === "space" && { backgroundColor: '#27ae60' }]}
               onPress={() => setNextType("space")}

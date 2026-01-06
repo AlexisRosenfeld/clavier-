@@ -50,12 +50,12 @@ export default function LesBouttons({ circles, text, setText }) {
               style={({ pressed }) => [
                 styles.button,
                 styles.spaceButton,
-                { position: 'absolute', left: c.x - 75, top: c.y - 30, backgroundColor: '#eee' },
-                pressed && { backgroundColor: 'black' }
+                { position: 'absolute', left: c.x - 75, top: c.y - 30, backgroundColor: '#27ae60' },
+                pressed && { backgroundColor: '#219150' }
               ]}
               onPress={() => setText((prev) => prev + ' ')}
             >
-              <Text style={styles.buttonText}>␣</Text>
+              <Text style={[styles.buttonText, { fontSize: 28 }]}>␣</Text>
             </Pressable>
           );
         } else if (c.type === "backspace") {
@@ -65,12 +65,12 @@ export default function LesBouttons({ circles, text, setText }) {
               style={({ pressed }) => [
                 styles.button,
                 styles.backspaceButton,
-                { position: 'absolute', left: c.x - 60, top: c.y - 30, backgroundColor: '#eee' },
-                pressed && { backgroundColor: 'black' }
+                { position: 'absolute', left: c.x - 60, top: c.y - 30, backgroundColor: '#e67e22' },
+                pressed && { backgroundColor: '#b95c00' }
               ]}
               onPress={() => setText((prev) => prev.slice(0, -1))}
             >
-              <Text style={styles.buttonText}>⌫</Text>
+              <Text style={[styles.buttonText, { fontSize: 24 }]}>⌫</Text>
             </Pressable>
           );
         } else if (c.type === "shift") {
@@ -80,12 +80,12 @@ export default function LesBouttons({ circles, text, setText }) {
               style={({ pressed }) => [
                 styles.button,
                 styles.shiftButton,
-                { position: 'absolute', left: c.x - 30, top: c.y - 50, backgroundColor: '#eee' },
-                pressed && { backgroundColor: 'black' }
+                { position: 'absolute', left: c.x - 30, top: c.y - 50, backgroundColor: '#2980b9' },
+                pressed && { backgroundColor: '#14507c' }
               ]}
               // Ajoutez ici la logique shift si besoin
             >
-              <Text style={styles.buttonText}>⇧</Text>
+              <Text style={[styles.buttonText, { fontSize: 28 }]}>⇧</Text>
             </Pressable>
           );
         }
