@@ -3,7 +3,6 @@ import React, { createContext, useState } from 'react';
 
 import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
 // Déclarer le contexte à l'extérieur du composant pour pouvoir l'importer ailleurs
@@ -17,7 +16,21 @@ export default function TabLayout() {
     <CirclesContext.Provider value={{ circles, setCircles }}>
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+          tabBarActiveTintColor: '#000', // texte/icône actif en noir
+          tabBarInactiveTintColor: '#000', // texte/icône inactif en noir
+          tabBarStyle: {
+            backgroundColor: '#fff', // fond blanc
+            borderTopWidth: 1,
+            borderTopColor: '#eee',
+          },
+          tabBarItemStyle: {
+            // style par défaut des items
+          },
+          tabBarActiveBackgroundColor: '#e0e0e0', // fond plus foncé pour l'onglet actif
+          tabBarLabelStyle: {
+            fontSize: 16, // texte plus gros
+            fontWeight: 'bold', // texte en gras
+          },
           headerShown: false,
           tabBarButton: HapticTab,
         }}>
