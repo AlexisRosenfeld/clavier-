@@ -1,9 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PanResponder, Pressable, StyleSheet, View } from "react-native";
 
 
-// On reçoit maintenant circles et setCircles en props
-export default function CanvasCircles({ circles, setCircles }) {
+// On reçoit maintenant circles, setCircles et nextType en props
+export default function CanvasCircles({ circles, setCircles, nextType, setNextType }) {
+        // Remettre nextType à 'normal' après ajout d'un cercle
+        const prevCount = useRef(circles.length);
+        useEffect(() => {
+          if (circles.length > prevCount.current) {
+            setNextType && setNextType("normal");
+          }
+          prevCount.current = circles.length;
+        }, [circles.length, setNextType]);
       // Pour stocker le move en attente si dragOffset n'est pas prêt
       const pendingMove = useRef(null);
     // Pour ignorer le premier move si dragOffset n'est pas prêt
@@ -16,7 +24,7 @@ export default function CanvasCircles({ circles, setCircles }) {
   const panResponders = useRef([]);
 
   const addCircleAt = (x, y) => {
-    setCircles((prev) => [...prev, { x, y, r: 30 }]);
+    setCircles((prev) => [...prev, { x, y, r: 30, type: nextType }]);
   };
 
   // Création des PanResponders pour chaque cercle

@@ -6,28 +6,10 @@ import { CirclesContext } from "./_layout";
 export default function CanvasScreen() {
   const { circles, setCircles } = useContext(CirclesContext);
   const [nextType, setNextType] = useState("normal");
-  // On injecte une version custom de setCircles qui ajoute le type voulu
-  const handleSetCircles = (updater) => {
-    if (typeof updater === "function") {
-      setCircles((prev) => {
-        const res = updater(prev);
-        // Si on ajoute un cercle, on applique le type choisi
-        if (Array.isArray(res) && res.length > prev.length) {
-          const last = res[res.length - 1];
-          if (last && (!last.type || last.type === "normal")) {
-            res[res.length - 1] = { ...last, type: nextType };
-          }
-          setNextType("normal");
-        }
-        return res;
-      });
-    } else {
-      setCircles(updater);
-    }
-  };
+  // Plus besoin de handleSetCircles, on passe setCircles directement
   return (
     <View style={styles.container}>
-      <CanvasCircles circles={circles} setCircles={handleSetCircles} />
+      <CanvasCircles circles={circles} setCircles={setCircles} nextType={nextType} setNextType={setNextType} />
       {/* Bouton superposé */}
       <View style={styles.overlay} pointerEvents="box-none">
         <View style={{ flexDirection: 'row', gap: 12 }}>
